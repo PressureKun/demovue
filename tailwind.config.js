@@ -9,7 +9,7 @@ module.exports = {
       md: "768px",
       lg: "1024px",
       xl: "1280px",
-      "2xl": "1536px",
+      "2xl": "1440px",
     },
     colors: ({ colors }) => ({
       inherit: colors.inherit,
@@ -39,6 +39,18 @@ module.exports = {
       fuchsia: colors.fuchsia,
       pink: colors.pink,
       rose: colors.rose,
+      //custom project colors:
+      primary: {
+        light: '#67c79b',
+        DEFAULT: '#42b982',
+        dark: '#349468',
+      },
+      secondary: {
+        light: '#9ebaf3',
+        DEFAULT: '#5e8cec',
+        dark: '#4162a5',
+      }
+
     }),
     columns: {
       auto: "auto",
@@ -962,5 +974,9 @@ module.exports = {
     "active",
     "disabled",
   ],
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/typography'),
+    require('@tailwindcss/line-clamp'),
+    require('@tailwindcss/aspect-ratio'),
+  ]
 };

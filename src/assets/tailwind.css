@@ -1,3 +1,5 @@
+@import "./tailwind-forms.scss";
+
 @tailwind base;
 
 @tailwind components;

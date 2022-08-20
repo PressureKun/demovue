@@ -1,0 +1,18 @@
+@layer base {
+  .field {
+    @apply flex flex-col gap-2;
+
+    &__title {
+      @apply text-sm font-normal;
+    }
+
+    &__input {
+      @apply rounded-md shadow-sm border border-gray-800 
+      border-opacity-25
+      outline-none
+      transition-colors
+      py-1 px-2
+      focus:border-primary focus:shadow-none;
+    }
+  }
+}
