@@ -1,15 +1,19 @@
 <template>
-  <label class="field">
+  <fieldset class="field__group">
     <legend class="field__title"><slot></slot></legend>
 
-    <input
-      :type="type"
-      :required="required"
-      :name="name"
-      v-model="dataValue"
-      class="field__input"
-    />
-  </label>
+    <label v-for="option in options" :key="option.key" class="field radio">
+      <span class="radio__text">{{ option.name ?? option.key }}</span>
+      <input
+        v-model="dataValue"
+        :required="required"
+        :type="type"
+        :name="name"
+        :value="option.key"
+        class="radio__input"
+      />
+    </label>
+  </fieldset>
 </template>
 
 <script setup lang="ts">
@@ -30,4 +34,4 @@ const props = defineProps<Props>();
 const dataValue: Ref<string | number> = ref(props.value);
 </script>
 
-<style lang="postcss" scoped></style>
+<style scoped></style>

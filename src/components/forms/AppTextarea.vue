@@ -2,22 +2,24 @@
   <label class="field">
     <legend class="field__title"><slot></slot></legend>
 
-    <input
+    <textarea
       :type="type"
       :required="required"
       :name="name"
       v-model="dataValue"
       class="field__input"
-    />
+    ></textarea>
   </label>
 </template>
 
 <script setup lang="ts">
 import { reactive, ref, Ref } from "vue";
-import { TInputType } from "@/types";
+
+import { TFormElement, TInputType } from "@/types";
 
 export interface Props {
   name: string;
+  element: TFormElement;
   type?: TInputType;
   value: string | number;
   options?: { key: string; name: string | "" }[];

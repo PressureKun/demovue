@@ -5,7 +5,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
     name: "home",
-    component: HomeView,
+    component: HomeView
   },
   {
     path: "/maps",
@@ -14,7 +14,7 @@ const routes: Array<RouteRecordRaw> = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/MapsView.vue"),
+      import(/* webpackChunkName: "about" */ "../views/MapsView.vue")
   },
   {
     path: "/timer",
@@ -23,13 +23,13 @@ const routes: Array<RouteRecordRaw> = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/TimerView.vue"),
-  },
+      import(/* webpackChunkName: "about" */ "../views/TimerView.vue")
+  }
 ];
 
 const router = createRouter({
   history: createWebHashHistory(),
-  routes,
+  routes
 });
 
 export default router;
