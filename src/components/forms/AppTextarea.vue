@@ -15,11 +15,10 @@
 <script setup lang="ts">
 import { reactive, ref, Ref } from "vue";
 
-import { TFormElement, TInputType } from "@/types";
+import { TInputType } from "@/types";
 
-export interface Props {
+interface IProps {
   name: string;
-  element: TFormElement;
   type?: TInputType;
   value: string | number;
   options?: { key: string; name: string | "" }[];
@@ -27,7 +26,7 @@ export interface Props {
   validations?: string[] | null;
 }
 
-const props = defineProps<Props>();
+const props = defineProps<IProps>();
 
 const dataValue: Ref<string | number> = ref(props.value);
 </script>

@@ -20,7 +20,7 @@
 import { reactive, ref, Ref } from "vue";
 import { TInputType } from "@/types";
 
-export interface Props {
+interface IProps {
   name: string;
   type?: TInputType;
   value: string | number;
@@ -29,7 +29,7 @@ export interface Props {
   validations?: string[] | null;
 }
 
-const props = defineProps<Props>();
+const props = defineProps<IProps>();
 
 const dataValue: Ref<string | number> = ref(props.value);
 </script>
