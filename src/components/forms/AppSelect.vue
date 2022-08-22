@@ -2,20 +2,22 @@
   <label class="field">
     <legend class="field__title"><slot></slot></legend>
 
-    <textarea
-      :type="type"
+    <select
       :required="required"
       :name="name"
-      @input="$emit('dataChange', dataValue, name)"
+      @change="$emit('dataChange', dataValue, name)"
       v-model="dataValue"
       class="field__input"
-    ></textarea>
+    >
+      <option v-for="option in options" :key="option.key" :value="option.key">
+        {{ option.name }}
+      </option>
+    </select>
   </label>
 </template>
 
 <script setup lang="ts">
 import { reactive, ref, Ref } from "vue";
-
 import { TInputType } from "@/types";
 
 interface IProps {

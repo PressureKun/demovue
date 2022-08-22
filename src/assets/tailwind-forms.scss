@@ -1,18 +1,41 @@
 @layer base {
   .field {
-    @apply flex flex-col gap-2;
+    @apply flex flex-col items-start gap-2;
 
     &__title {
-      @apply text-sm font-normal;
+      @apply text-sm font-medium shadow-md text-white bg-primary py-0.5 px-2 rounded;
     }
 
     &__input {
-      @apply rounded-md shadow-sm border border-gray-800 
+      @apply rounded-md w-full shadow-sm border border-gray-800 
       border-opacity-25
       outline-none
       transition-colors
-      py-1 px-2
+      py-2 px-2
       focus:border-primary focus:shadow-none;
+    }
+
+    &__group {
+      @apply flex flex-col gap-2;
+    }
+  }
+
+  .radio {
+    @apply relative cursor-pointer;
+
+    &__input {
+      @apply absolute w-0 h-0 opacity-0;
+
+      &:checked& + .radio__text {
+        @apply before:bg-primary;
+      }
+    }
+
+    &__text {
+      @apply text-sm font-normal inline-block
+      before:inline-block before:mr-2 before:left-0 before:w-3 
+      before:h-3 before:border-2 before:rounded-sm before:transition-colors
+      before:border-primary;
     }
   }
 }

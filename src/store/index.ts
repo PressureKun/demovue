@@ -1,9 +1,11 @@
-import { createStore } from "vuex";
+import { createStore, StoreOptions } from "vuex";
+import { IRootState } from "./types";
 
-export default createStore({
-  state: {},
-  getters: {},
-  mutations: {},
-  actions: {},
+const store: StoreOptions<IRootState> = {
+  state: {
+    helloMessage: "Hello World"
+  },
   modules: {}
-});
+};
+
+export default createStore(store);

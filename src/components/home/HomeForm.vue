@@ -1,7 +1,6 @@
 <template>
-  <div class="home__block">
-    <form>
-      <!-- <AppInput
+  <form class="mx-auto grid grid-cols-2 gap-4 w-3/5">
+    <!-- <AppInput
         :inputName="userData.username.name"
         :inputValue="userData.username.value"
         :inputType="'text'"
@@ -9,30 +8,32 @@
         Введите ваше имя:
       </AppInput> -->
 
-      <component
-        v-for="field in userData"
-        :key="field.name"
-        :is="choseComponent(field.element)"
-        :name="field.name"
-        :type="field.type"
-        :value="field.value"
-        :options="field.options"
-        :validations="field.validations"
-        :required="field.required"
-        >{{ field.text }}</component
-      >
-    </form>
-  </div>
+    <component
+      v-for="field in userData"
+      :key="field.name"
+      :is="choseComponent(field.element)"
+      :name="field.name"
+      :type="field.type"
+      :value="field.value"
+      :options="field.options"
+      :validations="field.validations"
+      :required="field.required"
+      @dataChange="setData"
+      >{{ field.text }}</component
+    >
+  </form>
 </template>
 
 <script setup lang="ts">
+import { reactive, computed, Component } from "vue";
+
 import AppInput from "../forms/AppInput.vue";
 import AppRadio from "../forms/AppRadio.vue";
+import AppSelect from "../forms/AppSelect.vue";
 import AppTextarea from "../forms/AppTextarea.vue";
 
 import { IUserInput } from "@/types";
-
-import { reactive, computed, Component } from "vue";
+import store from "@/store";
 
 interface IUserData {
   [key: string]: IUserInput;
@@ -56,6 +57,14 @@ const userData: IUserData = reactive({
     value: "",
     required: false
   },
+  userbirth: {
+    name: "usersurname",
+    element: "input",
+    text: "Введите вашу дату рождения",
+    type: "date",
+    value: "",
+    required: false
+  },
   useremail: {
     name: "email",
     element: "input",
@@ -64,6 +73,27 @@ const userData: IUserData = reactive({
     value: "",
     required: false,
     validations: ["email"]
+  },
+  userseason: {
+    name: "season",
+    element: "select",
+    text: "Выберете ваше любимое время года",
+    value: "",
+    required: false,
+    options: [
+      { key: "winter", name: "Зима" },
+      { key: "spring", name: "Весна" },
+      { key: "summer", name: "Лето" },
+      { key: "autumn", name: "Осень" }
+    ]
+  },
+  userphoto: {
+    name: "image",
+    element: "input",
+    text: "Загрузите ваш аватар",
+    type: "file",
+    value: "",
+    required: false
   },
   userdesc: {
     name: "descripttion",
@@ -84,14 +114,6 @@ const userData: IUserData = reactive({
       { key: "female", name: "Женский" }
     ],
     required: false
-  },
-  userphoto: {
-    name: "image",
-    element: "input",
-    text: "Загрузите ваш аватар",
-    type: "file",
-    value: "",
-    required: false
   }
 });
 
@@ -103,10 +125,20 @@ const choseComponent = (element: string): Component => {
       return AppTextarea;
     case "radio":
       return AppRadio;
+    case "select":
+      return AppSelect;
 
     default:
       return AppInput;
   }
+};
+
+const storeTest = computed(() => store.state.helloMessage);
+
+const setData = (value: string | number, name: string | "") => {
+  Object.values(userData).map((block) => {
+    return block.name === name ? (block.value = value) : block;
+  });
 };
 </script>
 

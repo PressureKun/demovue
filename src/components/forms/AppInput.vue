@@ -6,6 +6,7 @@
       :type="type"
       :required="required"
       :name="name"
+      @input="$emit('dataChange', dataValue, name)"
       v-model="dataValue"
       class="field__input"
     />
@@ -28,6 +29,10 @@ interface IProps {
 const props = defineProps<IProps>();
 
 const dataValue: Ref<string | number> = ref(props.value);
+
+const emits = defineEmits<{
+  (e: "dataChange", value: string | number, name: string | ""): void;
+}>();
 </script>
 
 <style lang="postcss" scoped></style>
