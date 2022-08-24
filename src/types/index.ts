@@ -26,3 +26,7 @@ export interface IUserInput {
   required?: boolean;
   validations?: string[] | null;
 }
+
+export interface IUserData {
+  [key: string]: IUserInput;
+}

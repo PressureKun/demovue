@@ -14,13 +14,13 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, ref, Ref } from "vue";
+import { computed, ref, Ref } from "vue";
 import { TInputType } from "@/types";
 
 interface IProps {
   name: string;
   type?: TInputType;
-  value: string | number;
+  value?: string | number;
   options?: { key: string; name: string | "" }[];
   required?: boolean;
   validations?: string[] | null;
@@ -28,7 +28,7 @@ interface IProps {
 
 const props = defineProps<IProps>();
 
-const dataValue: Ref<string | number> = ref(props.value);
+const dataValue: Ref<string | number> = ref(props.value ?? "");
 
 const emits = defineEmits<{
   (e: "dataChange", value: string | number, name: string | ""): void;
