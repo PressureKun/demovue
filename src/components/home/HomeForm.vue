@@ -1,7 +1,7 @@
 <template>
   <form
     @submit.prevent="saveUserInfo"
-    class="mx-auto grid grid-cols-2 gap-4 w-full lg:w-3/5"
+    class="mx-auto flex flex-col lg:flex-wrap gap-4 w-full lg:w-3/5"
   >
     <!-- <AppInput
         :inputName="userData.username.name"
@@ -21,11 +21,11 @@
       :options="field.options"
       :validations="field.validations"
       :required="field.required"
+      :file="field.file"
       @dataChange="setData"
       >{{ field.text }}</component
     >
 
-    {{ testGetter }}
     <button
       type="submit"
       class="btn btn--primary bg-primary rounded text-white py-2 font-medium"
@@ -42,9 +42,9 @@ import AppInput from "../forms/AppInput.vue";
 import AppRadio from "../forms/AppRadio.vue";
 import AppSelect from "../forms/AppSelect.vue";
 import AppTextarea from "../forms/AppTextarea.vue";
+import AppFileUpload from "../forms/AppFileUpload.vue";
 
 import { IUserData } from "@/types";
-import { mutations } from "@/store/user/mutations";
 
 const store = useStore();
 
@@ -98,9 +98,12 @@ const userData: IUserData = reactive({
   },
   userphoto: {
     name: "image",
-    element: "input",
+    element: "file",
     text: "Загрузите ваш аватар",
-    type: "file",
+    file: {
+      types: "image/png, image/jpeg",
+      filesAmount: 1
+    },
     value: "",
     required: false
   },
@@ -127,6 +130,9 @@ const userData: IUserData = reactive({
 });
 
 const setData = (value: string | number, name: string | "") => {
+  console.log("🚀 ~ file: HomeForm.vue ~ line 134 ~ setData ~ name", name);
+  console.log("🚀 ~ file: HomeForm.vue ~ line 134 ~ setData ~ value", value);
+
   Object.values(userData).map((block) => {
     return block.name === name ? (block.value = value) : block;
   });
@@ -142,6 +148,8 @@ const choseComponent = (element: string): Component => {
       return AppRadio;
     case "select":
       return AppSelect;
+    case "file":
+      return AppFileUpload;
 
     default:
       return AppInput;

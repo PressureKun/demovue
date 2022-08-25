@@ -22,6 +22,12 @@ export interface IUserInput {
   type?: TInputType;
   value: string | number;
   text?: string;
+  file?: {
+    types?: string;
+    fileSize?: number;
+    overallSize?: number;
+    filesAmount?: number;
+  };
   options?: { key: string; name: string | "" }[];
   required?: boolean;
   validations?: string[] | null;

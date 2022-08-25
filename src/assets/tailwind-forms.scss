@@ -18,6 +18,15 @@
     &__group {
       @apply flex flex-col gap-2;
     }
+
+    .filepond {
+      &--wrapper {
+        @apply w-full h-full flex;
+      }
+      &--root {
+        @apply w-full h-full flex;
+      }
+    }
   }
 
   .radio {
